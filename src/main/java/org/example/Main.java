@@ -105,12 +105,12 @@ public class Main {
 
                     Student student = new Student(idStudent,numeStudent,bugetStudent);
 
-                    System.out.println("ati introdus studentul: "+student);
+                    System.out.println("ati introdus studentul: " + student);
 
                     try {
                         student.setBudget(bugetStudent - cursGasit.getPrice());
                         date.get(cursGasit).add(student);
-                        //ds.saveData(date);
+                        ds.saveData(date);
                     } catch (BugetInvalidException e){
                         System.out.println("Bugetul este invalid");
                     }

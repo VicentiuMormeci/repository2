@@ -26,7 +26,7 @@ public class DataSaver {
                 continut2 = continut2.concat(studentID+","+cursId+"\n");
             }
         }
-        DataLoaderUtils.writeFile(DataLoaderUtils.MAPPING_FILE_PATH,continut2);
+        DataLoaderUtils.writeFile(DataLoaderUtils.MAPPING_FILE_PATH, continut2);
 
     }
 
