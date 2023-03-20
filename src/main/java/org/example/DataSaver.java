@@ -15,29 +15,29 @@ public class DataSaver {
     }
 
     private void saveMappings(Map<Course, List<Student>> date) throws IOException {
-        String continut = "";
+        String continut2 = "";
 
-        for (Map.Entry<Course,List<Student>> slice: date.entrySet()){
-            Course curs = slice.getKey();
+        for (Map.Entry<Course,List<Student>> felie: date.entrySet()){
+            Course curs = felie.getKey();
 
             int cursId = curs.getCourseId();
-            for (Student student: slice.getValue()){
+            for (Student student: felie.getValue()){
                 int studentID = student.getStudentId();
-                continut = continut.concat(studentID+","+cursId+"\n");
+                continut2 = continut2.concat(studentID+","+cursId+"\n");
             }
         }
-        DataLoaderUtils.writeFile(DataLoaderUtils.MAPPING_FILE_PATH,continut);
+        DataLoaderUtils.writeFile(DataLoaderUtils.MAPPING_FILE_PATH,continut2);
 
     }
 
     private void saveStudents(Map<Course, List<Student>> date) throws IOException {
-        String continut = "";
+        String continut1 = "";
         for (List<Student> valoriDinMap: date.values()){
             for (Student student:valoriDinMap){
-                continut = continut.concat(student.toString().concat("\n"));
+                continut1 = continut1.concat(student.toString().concat("\n"));
             }
         }
-        DataLoaderUtils.writeFile(DataLoaderUtils.STUDENT_FILE_PATH,continut);
+        DataLoaderUtils.writeFile(DataLoaderUtils.STUDENT_FILE_PATH,continut1);
     }
 
     private void saveCourses(Map<Course, List<Student>> date) throws IOException {
