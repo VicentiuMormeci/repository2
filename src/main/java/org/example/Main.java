@@ -1,14 +1,11 @@
 package org.example;
 
-import javax.sound.midi.MetaMessage;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-
-import static org.example.DataLoaderUtils.COURSE_FILE_PATH;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -19,6 +16,7 @@ public class Main {
         dl.loadData();
         Map<Course, List<Student>> date = dl.getDataMap();
         Metods metode = new Metods();
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Puteti introduce urmatoarele optiuni:\n" +
                 "0 – Ies din program.\n" +
@@ -68,8 +66,9 @@ public class Main {
 
                     int cursuriDisponibile = 0;
                     for (Map.Entry<Course, List<Student>> felie: date.entrySet()) {
-                        if (felie.getValue().size() < 2) {
-                            System.out.println("Curse indisponibil:" + felie.getKey());
+                        if (felie.getValue().size() < 9) {
+                            System.out.println("Curs disponibil:" + felie.getKey());
+
                             cursuriDisponibile++;
                         }
                     }
@@ -85,7 +84,7 @@ public class Main {
                     LocalDate acum = LocalDate.now();
 
                     for(Course curs: date.keySet()){
-                        if (curs.getCourseName().equals(numeCursCautat)){
+                        if (curs.getCourseName().equals(numeCursCautat) && acum.isBefore(curs.getStartDate())){
                             System.out.println("Am gasit cursul");
                             cursGasit = curs;
                         }
@@ -110,8 +109,8 @@ public class Main {
                     try{
                         student.setBudget(bugetStudent - cursGasit.getPrice());
                         date.get(cursGasit).add(student);
-                        System.out.println(date);
-                        ds.saveData(date);
+//                        System.out.println(date);
+//                        ds.saveData(date);
                     } catch (BugetInvalidException e){
                         System.out.println("Bugetul este invalid");
                     }
@@ -130,7 +129,7 @@ public class Main {
                         for (Student studentDinLista:lista){
                             if (studentDinLista.getStudentName().contains(numeStudentCautat)){
                                 System.out.println("Am gasit studentul:" + studentDinLista);
-                        //putem sa vedem cum putem afisa si cursul la care este inscris
+                                //putem sa vedem cum putem afisa si cursul la care este inscris
                             }
                         }
                     }
@@ -143,8 +142,8 @@ public class Main {
                         for(Student studentLaCurs: date.get(curs)){
                             System.out.println(studentLaCurs.getStudentName());
                         }
+                        System.out.println("\n");
                     }
-
                     break;
                 default:
                     System.out.println("Aceasta optiune nu exista!");
