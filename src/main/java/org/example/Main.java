@@ -88,11 +88,12 @@ public class Main {
                             System.out.println("Am gasit cursul");
                             cursGasit = curs;
                         }
-                        if (cursGasit == null){
-                            System.out.println("acest curs nu exista");
-                            break;
-                        }
                     }
+                    if (cursGasit == null){
+                        System.out.println("acest curs nu exista");
+                        break;
+                    }
+
                     System.out.println("introdu id-ul studentului: ");
                     int idStudent = Integer.parseInt(scanner.nextLine());
 
@@ -106,17 +107,17 @@ public class Main {
 
                     System.out.println("ati introdus studentul: "+student);
 
-                    try{
+                    try {
                         student.setBudget(bugetStudent - cursGasit.getPrice());
                         date.get(cursGasit).add(student);
-//                        System.out.println(date);
-//                        ds.saveData(date);
+                        //ds.saveData(date);
                     } catch (BugetInvalidException e){
                         System.out.println("Bugetul este invalid");
                     }
 
                     System.out.println(dl.getDataMap());
                     ds.saveData(dl.getDataMap());
+                    ds.saveData(date);
                     break;
 
                 case 4:
